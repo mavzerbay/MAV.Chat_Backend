@@ -16,7 +16,6 @@ using System.Threading.Tasks;
 
 namespace MAV.Chat.API.Controllers
 {
-    [Authorize]
     public class UsersController : BaseApiController
     {
         private readonly IMapper _mapper;
@@ -34,6 +33,11 @@ namespace MAV.Chat.API.Controllers
         [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Pagination<IReadOnlyList<MemberDto>>>> GetUsers([FromQuery] UserSpecParams userSpecParams)
         {
+            var currentUserName = User.GetUserName();
+
+            if (userSpecParams.WithOutCurrent.HasValue && userSpecParams.WithOutCurrent.Value)
+                userSpecParams.UserName = currentUserName;
+
             var spec = new UserSpecification(userSpecParams);
 
             var specCount = new UserSpecificationForCount(userSpecParams);
@@ -67,14 +71,14 @@ namespace MAV.Chat.API.Controllers
             var spec = new UserSpecification(User.GetUserName());
             var user = await _unitOfWork.Repository<MavUser>().GetEntityWithSpec(spec);
 
-            _mapper.Map(memberUpdateDto, user); 
-            if (memberUpdateDto.ProfilePhoto!=null && memberUpdateDto.ProfilePhoto.Length > 0)
+            _mapper.Map(memberUpdateDto, user);
+            if (memberUpdateDto.ProfilePhoto != null && memberUpdateDto.ProfilePhoto.Length > 0)
             {
                 using (var ms = new MemoryStream())
                 {
                     memberUpdateDto.ProfilePhoto.CopyTo(ms);
                     byte[] fileBytes = ms.ToArray();
-                    if (fileBytes!=null && fileBytes.Length>0)
+                    if (fileBytes != null && fileBytes.Length > 0)
                     {
                         user.ProfilePhoto = fileBytes;
                     }

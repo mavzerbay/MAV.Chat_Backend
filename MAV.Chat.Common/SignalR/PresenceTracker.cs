@@ -34,12 +34,12 @@ namespace MAV.Chat.Common.SignalR
             {
                 if (!OnlineUsers.ContainsKey(userName)) return Task.FromResult(isOffline);
 
-                OnlineUsers[userName].Remove(connectionId);
-                if (OnlineUsers[userName].Count == 0)
-                {
+                // OnlineUsers[userName].Remove(connectionId); TODO: Dön bir bak 
+                // if (OnlineUsers[userName].Count == 0)
+                // {
                     OnlineUsers.Remove(userName);
                     isOffline = true;
-                }
+                //}
             }
 
             return Task.FromResult(isOffline);

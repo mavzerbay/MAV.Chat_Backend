@@ -23,9 +23,11 @@ namespace MAV.Chat.API
                 try
                 {
                     var context = services.GetRequiredService<MavDbContext>();
+                    var userManager = services.GetRequiredService<UserManager<MavUser>>();
                     var roleManager = services.GetRequiredService<RoleManager<MavRole>>();
                     await context.Database.MigrateAsync();
-                    await MavDbContextSeed.SeedAsync(context, loggerFactory,roleManager);
+                    await MavDbContextSeed.SeedAsync(context, loggerFactory);
+                    await MavDbContextSeed.SeedUsers(userManager, roleManager);
 
                 }
                 catch (Exception ex)

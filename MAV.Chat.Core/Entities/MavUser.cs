@@ -30,5 +30,7 @@ namespace MAV.Chat.Core.Entities
         public ICollection<Message> SendedMessages { get; set; }
         public ICollection<Message> ReceivedMessages { get; set; }
         public ICollection<MavUserRole> UserRoles { get; set; }
+        [NotMapped]
+        public string PhotoUrl { get; set; }
     }
 }

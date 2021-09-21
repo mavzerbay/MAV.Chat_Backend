@@ -1,6 +1,7 @@
 using MAV.Chat.API.Middleware;
 using MAV.Chat.Common.Extensions;
 using MAV.Chat.Common.Helpers;
+using MAV.Chat.Common.SignalR;
 using MAV.Chat.Infrastructure.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -72,6 +73,7 @@ namespace MAV.Chat.API
             });
 
             services.AddControllers();
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -99,6 +101,8 @@ namespace MAV.Chat.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<PresenceHub>("hubs/presence");
+                endpoints.MapHub<MessageHub>("hubs/message");
             });
         }
     }

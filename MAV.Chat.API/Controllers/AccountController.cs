@@ -40,6 +40,8 @@ namespace MAV.Chat.API.Controllers
 
             user.UserName = registerDto.Email.ToLower();
 
+            user.CreatedDate = DateTime.Now;
+
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
             if (!result.Succeeded) return BadRequest(result.Errors);

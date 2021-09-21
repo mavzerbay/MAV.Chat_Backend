@@ -13,6 +13,7 @@ namespace MAV.Chat.Core.Specifications
         public UserSpecification(UserSpecParams userSpecParams)
                : base(x =>
                    (string.IsNullOrEmpty(userSpecParams.Search) || x.Name.ToLower().Contains(userSpecParams.Search.ToLower())) || x.Surname.ToLower().Contains(userSpecParams.Search.ToLower()) &&
+                   (!userSpecParams.WithOutCurrent.HasValue || (userSpecParams.WithOutCurrent.HasValue && x.UserName!=userSpecParams.UserName)) &&
                    (string.IsNullOrEmpty(userSpecParams.PhoneNumber) || x.PhoneNumber == userSpecParams.PhoneNumber) &&
                    (string.IsNullOrEmpty(userSpecParams.UserName) || x.UserName.ToLower().Contains(userSpecParams.UserName.ToLower())))
         {

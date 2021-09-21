@@ -4,5 +4,6 @@ namespace MAV.Chat.Common.Helpers
     {
         public string PhoneNumber { get; set; }
         public string UserName { get; set; }
+        public bool? WithOutCurrent { get; set; }
     }
 }

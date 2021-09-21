@@ -32,6 +32,7 @@ namespace MAV.Chat.Infrastructure.Services
             {
                 new Claim(JwtRegisteredClaimNames.Email,user.Email),
                 new Claim(JwtRegisteredClaimNames.GivenName,user.NameSurname),
+                new Claim(ClaimTypes.Name,user.UserName),
             };
 
             var roles = await _userManager.GetRolesAsync(user);

@@ -8,6 +8,6 @@ namespace MAV.Chat.Common.Helpers
         public string UserName { get; set; }
         public string ReceiverUserName { get; set; }
         public bool GetMessageThread { get; set; } = false;
-        public string Container { get; set; } = "Unread";
+        public string Container { get; set; }
     }
 }
