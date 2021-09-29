@@ -43,13 +43,13 @@ namespace MAV.Chat.Common.SignalR
             var spec = new MessageSpecification(new MessageSpecParams() { GetMessageThread = true, UserName = currentUserName, ReceiverUserName = otherUser });
             var messages = await _unitOfWork.Repository<Message>().ListAsync(spec);
 
-            var unreadMessages = messages.Where(m => m.DateRead == null && m.ReceiverUserName == currentUserName).ToList();
+            var unreadMessages = messages.Where(m => m.ReadDate == null && m.ReceiverUserName == currentUserName).ToList();
 
             if (unreadMessages.Any())
             {
                 for (int i = 0; i < unreadMessages.Count; i++)
                 {
-                    unreadMessages[i].DateRead = DateTime.UtcNow;
+                    unreadMessages[i].ReadDate = DateTime.UtcNow;
                 }
             }
 
@@ -115,7 +115,7 @@ namespace MAV.Chat.Common.SignalR
 
             if (group.Connections.Any(x => x.UserName == receiver.UserName))
             {
-                message.DateRead = DateTime.UtcNow;
+                message.ReadDate = DateTime.UtcNow;
             }
             else
             {

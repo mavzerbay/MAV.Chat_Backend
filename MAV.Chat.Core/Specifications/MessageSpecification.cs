@@ -18,6 +18,8 @@ namespace MAV.Chat.Core.Specifications
 
             ApplyPaging(messageSpecParams.PageSize * (messageSpecParams.PageIndex - 1), messageSpecParams.PageSize);
 
+            AddInclude(x => x.Sender);
+            AddInclude(x => x.Receiver);
             if (messageSpecParams.GetMessageThread)
             {
                 AddCriteria(m => m.Receiver.UserName == messageSpecParams.UserName && m.Sender.UserName == messageSpecParams.ReceiverUserName || m.Receiver.UserName == messageSpecParams.ReceiverUserName && m.Sender.UserName == messageSpecParams.UserName);
@@ -38,7 +40,7 @@ namespace MAV.Chat.Core.Specifications
                         AddCriteria(x => x.SenderUserName == messageSpecParams.UserName);
                         break;
                     default:
-                        AddCriteria(x => x.ReceiverUserName == messageSpecParams.UserName && x.DateRead == null);
+                        AddCriteria(x => x.ReceiverUserName == messageSpecParams.UserName && x.ReadDate == null);
                         break;
                 }
             }

@@ -14,7 +14,7 @@ namespace MAV.Chat.Core.Entities
         public MavUser Receiver { get; set; }
         public string ReceiverUserName { get; set; }
         public string MessageText { get; set; }
-        public DateTime? DateRead { get; set; }
+        public DateTime? ReadDate { get; set; }
         public DateTime SentDate { get; set; } = DateTime.UtcNow;
         public bool IsDeletedBySender { get; set; }
         public bool IsDeletedByReceiver { get; set; }

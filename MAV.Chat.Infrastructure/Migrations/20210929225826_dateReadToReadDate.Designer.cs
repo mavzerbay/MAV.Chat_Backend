@@ -3,14 +3,16 @@ using System;
 using MAV.Chat.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MAV.Chat.Infrastructure.Migrations
 {
     [DbContext(typeof(MavDbContext))]
-    partial class MavDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210929225826_dateReadToReadDate")]
+    partial class dateReadToReadDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
